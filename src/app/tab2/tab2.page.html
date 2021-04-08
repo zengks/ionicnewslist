@@ -1,17 +1,26 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 2
+       TO DO LIST
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list class="ion-padding">
+    <ion-item *ngFor="let item of items; let i = index">
+      <ion-icon [name]="item.icon" slot="start"></ion-icon>
+      {{item.content}}
+      <ion-button slot="end" (click)="deleteItem(i)">Delete</ion-button>
+    </ion-item>
+  </ion-list>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <form #toDoForm = "ngForm" (ngSubmit)="onSubmit(toDoForm)">
+    <ion-input class="item item-input">
+      <input type="text" name="content" [(ngModel)]="inputContent" placeholder="+ Add a Task" required>
+      <ion-button [disabled]="!toDoForm.form.valid" type="submit">Add</ion-button>
+    </ion-input>
+  </form>
+  
+  <!-- <app-explore-container name="Tab 2 page"></app-explore-container> -->
 </ion-content>
